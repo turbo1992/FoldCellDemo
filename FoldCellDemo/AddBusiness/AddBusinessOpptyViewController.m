@@ -328,6 +328,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    // 如果项目引用了IQKeyboard等键盘处理工具，此处最好注释
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
