@@ -8,8 +8,11 @@
 
 #import "AddBusinessOpptyViewController.h"
 #import "AddBusinessOppCell.h"
+#import <objc/runtime.h>
 
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+
+static char buttonAssociation;
 
 @interface AddBusinessOpptyViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UITextViewDelegate>
 {
@@ -73,6 +76,14 @@
     [self.view addSubview:self.tableView];
     
     [self.tableView registerClass:[AddBusinessOppCell class] forCellReuseIdentifier:@"AddBusinessOppCell"];
+    
+    /* 完成 */
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(self.view.frame.size.width - 65, 5, 45, 30);
+    [button setTitle:@"top" forState:UIControlStateNormal];
+    [self.navigationController.navigationBar addSubview:button];
+    [self addAssion:button];
+    
     
     [self createFooterView];
     
@@ -328,13 +339,39 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    UIButton *button = [self getAssociation];
+    
+    if (scrollView.contentOffset.y > 50.0f - 64.0f) {
+        [button setTitle:@"bot" forState:UIControlStateNormal];
+    } else {
+        [button setTitle:@"top" forState:UIControlStateNormal];
+    }
+    
     // 如果项目引用了IQKeyboard等键盘处理工具，此处最好注释
     [self.view endEditing:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)addAssion:(id)objc {
+    objc_setAssociatedObject(self, &buttonAssociation, objc, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIButton *)getAssociation {
+    id objc = objc_getAssociatedObject(self, &buttonAssociation);
+    if ([objc isKindOfClass:[UIButton class]] && objc) {
+        return objc;
+    }
+    return nil;
+}
+
+- (void)dealloc {
+    objc_setAssociatedObject(self, &buttonAssociation, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_removeAssociatedObjects(self);
 }
 
 @end
