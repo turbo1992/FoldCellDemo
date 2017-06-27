@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  AddBusinessOpptyViewController.h
 //  FoldCellDemo
 //
 //  Created by Turbo on 2017/6/27.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface AddBusinessOpptyViewController : UIViewController
 
 @end
-
