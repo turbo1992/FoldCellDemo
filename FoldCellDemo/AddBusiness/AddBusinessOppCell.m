@@ -22,7 +22,7 @@
         //标题
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, .0f, SCREEN_WIDTH/2, 44.0f)];
         self.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-        self.titleLabel.text = @"尚鲁超";
+        self.titleLabel.text = @"元芳";
         self.titleLabel.alpha = 0.6;
         [self.contentView addSubview:self.titleLabel];
         
