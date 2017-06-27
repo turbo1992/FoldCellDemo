@@ -293,7 +293,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [self.view endEditing:YES];
-    [self.dataSourceArray replaceObjectAtIndex:indexPath.section withObject:@"二狗子二狗子"];
+    [self.dataSourceArray replaceObjectAtIndex:indexPath.section withObject:@"title content"];
     
     NSInteger index = indexPath.section;
     if (index > 4) {
